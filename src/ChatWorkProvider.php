@@ -45,11 +45,35 @@ class ChatWorkProvider extends AbstractProvider implements ProviderInterface
     }
 
     /**
+     * Get the access token response for the given code.
+     *
+     * @param  string $code
+     *
+     * @return array
+     */
+    public function getAccessTokenResponse($code)
+    {
+        $response = $this->getHttpClient()->post($this->getTokenUrl(), [
+            'headers'     => [
+                'Accept'        => 'application/json',
+                'Authorization' => 'Basic ' . base64_encode($this->clientId . ':' . $this->clientSecret),
+            ],
+            'form_params' => $this->getTokenFields($code),
+        ]);
+
+        return json_decode($response->getBody(), true);
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getTokenFields($code)
     {
-        return parent::getTokenFields($code) + ['grant_type' => 'authorization_code'];
+        return [
+            'code'         => $code,
+            'grant_type'   => 'authorization_code',
+            'redirect_uri' => $this->redirectUrl,
+        ];
     }
 
     /**
@@ -76,7 +100,7 @@ class ChatWorkProvider extends AbstractProvider implements ProviderInterface
             'id'       => $user['account_id'],
             'nickname' => $user['name'],
             'name'     => $user['name'],
-            'email'    => $user['mail'],
+            'email'    => $user['login_mail'],
             'avatar'   => $user['avatar_image_url'],
         ]);
     }
