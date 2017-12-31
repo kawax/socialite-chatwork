@@ -70,7 +70,7 @@ http://developer.chatwork.com/ja/oauth.html#secAppendix
 ```
 
 ## Demo
-https://github.com/kawax/socialite-chatwork-project
+https://github.com/kawax/socialite-project
 
 ## LICENCE
 MIT
