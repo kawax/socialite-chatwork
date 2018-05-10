@@ -4,6 +4,7 @@ namespace Revolution\Socialite\ChatWork;
 
 use Laravel\Socialite\SocialiteServiceProvider;
 use Laravel\Socialite\Contracts\Factory;
+use Laravel\Socialite\Facades\Socialite;
 
 class ChatWorkServiceProvider extends SocialiteServiceProvider
 {
@@ -21,12 +22,10 @@ class ChatWorkServiceProvider extends SocialiteServiceProvider
      */
     public function boot()
     {
-        $socialite = $this->app->make(Factory::class);
+        Socialite::extend('chatwork', function ($app) {
+            $config = $app['config']['services.chatwork'];
 
-        $socialite->extend('chatwork', function ($app) use ($socialite) {
-            $config = $this->app['config']['services.chatwork'];
-
-            return $socialite->buildProvider(ChatWorkProvider::class, $config);
+            return Socialite::buildProvider(ChatWorkProvider::class, $config);
         });
     }
 }
