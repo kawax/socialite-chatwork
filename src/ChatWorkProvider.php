@@ -97,11 +97,11 @@ class ChatWorkProvider extends AbstractProvider implements ProviderInterface
     protected function mapUserToObject(array $user)
     {
         return (new User())->setRaw($user)->map([
-            'id'       => $user['account_id'],
-            'nickname' => $user['name'],
-            'name'     => $user['name'],
-            'email'    => $user['login_mail'],
-            'avatar'   => $user['avatar_image_url'],
+            'id'       => $user['account_id'] ?? '',
+            'nickname' => $user['name'] ?? '',
+            'name'     => $user['name'] ?? '',
+            'email'    => $user['login_mail'] ?? '',
+            'avatar'   => $user['avatar_image_url'] ?? '',
         ]);
     }
 }
