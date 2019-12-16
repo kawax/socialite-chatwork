@@ -2,10 +2,10 @@
 
 namespace Revolution\Socialite\ChatWork;
 
-use Laravel\Socialite\SocialiteServiceProvider;
+use Illuminate\Support\ServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 
-class ChatWorkServiceProvider extends SocialiteServiceProvider
+class ChatWorkServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the service provider.

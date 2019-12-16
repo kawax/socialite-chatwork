@@ -2,6 +2,9 @@
 
 http://developer.chatwork.com/ja/
 
+## Requirements
+- PHP >= 7.2
+
 ## Installation
 ```
 composer require revolution/socialite-chatwork
